@@ -18,7 +18,7 @@ Currently the refresh token expires in 7 days instead of 90, and with NO PROVISI
 
 The client_id (the "app_key"), is now only used in the initial (or subsequent) oauth workflow. After that, access token renewal calls use a base64 encoded string combination of APP KEY(client_id) and client_secret from the Schwab developer "app" registration in the header as {"Authorization": f"Basic {self.base64_client_id}}.
 
-All other api endpoint calls use headers = {"Authorization": f"Bearer {self.state['access_token'] }"}. The client_id is not used in parameters as was in the TDA API.
+All other api endpoint calls use headers = {"Authorization": f"Bearer {self.state['access_token'] }"}. The client_id is not used in request parameters as was in the TDA API.
 
 Most if not all endpoint URLs are changed.
 
