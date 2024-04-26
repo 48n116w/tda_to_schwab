@@ -8,9 +8,10 @@ import time
 import urllib.parse
 
 from datetime import timedelta, timezone
-from typing import Dict, List
+from typing import Dict, List, Union
 import requests
 
+from schwab.option_chain import OptionChain
 from schwab.enums import VALID_CHART_VALUES
 from schwab.exceptions import (
     ExdLmtError,
@@ -1235,6 +1236,45 @@ class SchwabClient:
 
         # define the endpoint
         endpoint = "marketdata/v1/pricehistory"
+
+        # return the response of the get request.
+        return self._make_request(method="get", endpoint=endpoint, params=params)
+
+    def get_options_chain(self, option_chain: Union[Dict, OptionChain]) -> Dict:
+        """Returns Option Chain Data and Quotes.
+
+        Get option chain for an optionable Symbol using one of two methods. Either,
+        use the OptionChain object which is a built-in object that allows for easy creation
+        of the POST request. Otherwise, can pass through a dictionary of all the
+        arguments needed.
+
+        ### Documentation:
+        ----
+        ht-tps://developer.tdamer-itrade.com/option-chains/apis/get/marketdata/chains
+
+        ### Arguments:
+        ----
+        option_chain: Represents a dicitonary containing values to
+            query.
+
+        ### Usage:
+        ----
+            >>> td_client.get_options_chain(
+                option_chain={'key1':'value1'}
+            )
+        """
+
+        # First check if it's an `OptionChain` object.
+        if isinstance(option_chain, OptionChain):
+            # If it is, then grab the params.
+            params = option_chain.query_parameters
+
+        else:
+            # Otherwise just take the raw dictionary.
+            params = option_chain
+
+        # define the endpoint
+        endpoint = "marketdata/v1/chains"
 
         # return the response of the get request.
         return self._make_request(method="get", endpoint=endpoint, params=params)

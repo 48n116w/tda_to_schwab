@@ -269,3 +269,27 @@ Get price history
 # )
 
 # pprint(history)
+
+option_chain = {
+    "symbol": "F",
+    "contract_type": "CALL",  # str | None = "ALL",
+    "strike_count": None,
+    "include_quotes": False,
+    "strategy": "SINGLE",
+    "interval": None,
+    "strike": None,
+    "opt_range": "ITM",
+    "from_date": None,
+    "to_date": None,
+    "volatility": None,
+    "underlying_price": None,
+    "interest_rate": None,
+    "days_to_expiration": None,
+    "exp_month": "ALL",
+    "option_type": None,
+    "entitlement": None,
+}
+
+goc = trading_robot.session.get_options_chain(option_chain=option_chain)
+
+pprint(goc)

@@ -30,8 +30,6 @@ Not all of the endpoints of the TDA API are in the Schwab API yet. (If ever?) "S
 
 All of the function snippets in "tests_schwab_api.py" work as-is, but you must have a Schwab brokerage account number to test them. There's no sandbox for the Trader API - Individual yet, if there ever will be.
 
-These endpoints still need review:
-
-/chains
+This endpoint still needs review:
 
 /expirationchain
