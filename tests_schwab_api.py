@@ -270,9 +270,13 @@ Get price history
 
 # pprint(history)
 
+"""##########################
+Get option chain
+"""
+
 option_chain = {
     "symbol": "F",
-    "contract_type": "CALL",  # str | None = "ALL",
+    "contract_type": "CALL",  ## "ALL",
     "strike_count": None,
     "include_quotes": False,
     "strategy": "SINGLE",
@@ -290,6 +294,13 @@ option_chain = {
     "entitlement": None,
 }
 
-goc = trading_robot.session.get_options_chain(option_chain=option_chain)
+opt_chain = trading_robot.session.get_options_chain(option_chain=option_chain)
 
-pprint(goc)
+pprint(opt_chain)
+
+"""##########################
+Get expiration chain
+"""
+
+exp_chain = trading_robot.session.get_expiration_chain(symbol="TSLA")
+pprint(exp_chain)

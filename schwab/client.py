@@ -1279,6 +1279,17 @@ class SchwabClient:
         # return the response of the get request.
         return self._make_request(method="get", endpoint=endpoint, params=params)
 
+    def get_expiration_chain(self, symbol: str) -> Dict:
+        """
+        Get Option Expiration (Series) information for an optionable symbol.
+        Does not include individual options contracts for the underlying.
+        """
+        params = {"symbol": symbol}
+
+        endpoint = "marketdata/v1/expirationchain"
+
+        return self._make_request(method="get", endpoint=endpoint, params=params)
+
     """
     -----------------------------------------------------------
     MISC
