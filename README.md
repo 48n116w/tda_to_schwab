@@ -29,7 +29,3 @@ I have noticed one response schema change from TDA's in /quotes, it's likely the
 Not all of the endpoints of the TDA API are in the Schwab API yet. (If ever?) "Saved Orders", "Watchlist", some of the "User Preference" ones to name some.
 
 All of the function snippets in "tests_schwab_api.py" work as-is, but you must have a Schwab brokerage account number to test them. There's no sandbox for the Trader API - Individual yet, if there ever will be.
-
-This endpoint still needs review:
-
-/expirationchain
