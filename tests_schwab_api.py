@@ -4,6 +4,7 @@
 # For those that require an account number,
 # it must be Schwabs hash value for that account
 #
+rom schwab.option_chain import OptionChain
 from pyrobot.robot import PyRobot
 from pprint import pprint
 from configparser import ConfigParser
@@ -274,27 +275,50 @@ Get price history
 Get option chain
 """
 
-option_chain = {
-    "symbol": "F",
-    "contract_type": "CALL",  ## "ALL",
-    "strike_count": None,
-    "include_quotes": False,
-    "strategy": "SINGLE",
-    "interval": None,
-    "strike": None,
-    "opt_range": "ITM",
-    "from_date": None,
-    "to_date": None,
-    "volatility": None,
-    "underlying_price": None,
-    "interest_rate": None,
-    "days_to_expiration": None,
-    "exp_month": "ALL",
-    "option_type": None,
-    "entitlement": None,
-}
+# # this works as class OptionChain object:
 
-opt_chain = trading_robot.session.get_options_chain(option_chain=option_chain)
+today = date.today()
+chain = OptionChain(
+    symbol="SPY",
+    contract_type="ALL",  ## "ALL",
+    strike_count=3,  # 16,
+    include_quotes=True,
+    strategy="ANALYTICAL",
+    interval=None,
+    strike=None,
+    opt_range="ALL",
+    from_date=f"{today}",  # "2024-04-30",  # f"{today}",
+    to_date=f"{today}",  # "2024-04-30",  # f"{today}",
+    volatility=None,
+    underlying_price=None,
+    interest_rate=None,
+    days_to_expiration=None,
+    exp_month="ALL",
+    option_type="S",
+    entitlement=None,  # "NP",
+)
+opt_chain = trading_robot.session.get_options_chain(chain)
+pprint(opt_chain)
+
+##
+## or this works as 'raw' dict (around 1308 in client.py)
+##
+
+today = date.today()
+symbol = "SPY"
+opt_chain = {
+    "symbol": f"{symbol}",
+    "contractType": "ALL",
+    "optionType": "S",
+    "fromDate": f"{today}",
+    "toDate": f"{today}",
+    "strikeCount": 3,
+    "includeUnderlyingQuote": True,
+    # "includeQuotes": True,
+    "range": "ALL",
+    "strategy": "ANALYTICAL",
+}
+opt_chain = trading_robot.session.get_options_chain(opt_chain)
 
 pprint(opt_chain)
 
