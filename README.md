@@ -14,7 +14,7 @@ Schwab made many changes, some noteworthy ones:
 From Schwab's docs:
 "Account numbers in plain text cannot be used outside of headers or request/response bodies. As the first step consumers must invoke [/accounts/accountNumbers] to retrieve the list of plain text/encrypted value pairs, and use encrypted account values for all subsequent calls for any accountNumber request."
 
-Currently the refresh token expires in 7 days instead of 90, and with NO PROVISION to programmatically renew it. A new one can only be had through the oauth workflow. This is confirmed by TraderAPI@Schwab.com. Selenium/playwright/etc? 
+Currently the refresh token expires in 7 days instead of 90, and with NO PROVISION to programmatically renew it. A new one can only be had through the oauth workflow. This is confirmed by TraderAPI@Schwab.com.
 
 The client_id (the "app_key"), is now only used in the initial (or subsequent) oauth workflow. After that, access token renewal calls use a base64 encoded string combination of APP KEY(client_id) and client_secret from the Schwab developer "app" registration in the header as {"Authorization": f"Basic {self.base64_client_id}}.
 
