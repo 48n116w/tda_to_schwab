@@ -4,7 +4,7 @@
 # For those that require an account number,
 # it must be Schwabs hash value for that account
 #
-rom schwab.option_chain import OptionChain
+from schwab.option_chain import OptionChain
 from pyrobot.robot import PyRobot
 from pprint import pprint
 from configparser import ConfigParser
